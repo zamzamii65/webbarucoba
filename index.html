@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aralie & Arariel</title>
+  <title>TrishaLand</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
   <style>
     * {
       margin: 0;
@@ -12,9 +16,9 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
-      color: white;
-      background: #111;
+      font-family: "Poppins", sans-serif;
+      color: black;
+      background: #add8e6; /* fallback biru muda */
       overflow-x: hidden;
     }
 
@@ -24,7 +28,8 @@
       top: 0;
       left: 0;
       width: 100%;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(173, 216, 230, 0.8); /* biru muda semi transparan */
+      backdrop-filter: blur(8px);
       padding: 15px 20px;
       display: flex;
       justify-content: space-between;
@@ -34,8 +39,8 @@
 
     .logo {
       font-size: 22px;
-      font-weight: bold;
-      color: #ff69b4;
+      font-weight: 500;
+      color: #004080; /* biru tua */
     }
 
     nav ul {
@@ -46,13 +51,13 @@
 
     nav ul li a {
       text-decoration: none;
-      color: white;
-      font-weight: bold;
+      color: #000;
+      font-weight: 400;
       transition: 0.3s;
     }
 
     nav ul li a:hover {
-      color: #ff69b4;
+      color: #004080;
     }
 
     /* Hamburger */
@@ -66,7 +71,7 @@
     .hamburger span {
       width: 25px;
       height: 3px;
-      background: white;
+      background: #000;
       border-radius: 5px;
     }
 
@@ -77,7 +82,7 @@
         position: absolute;
         top: 60px;
         right: 20px;
-        background: rgba(0, 0, 0, 0.9);
+        background: #add8e6;
         flex-direction: column;
         gap: 15px;
         padding: 20px;
@@ -110,63 +115,41 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      z-index: -2;
+    }
+
+    /* Overlay gradasi biru tua → putih */
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 64, 128, 0.5),   /* biru tua transparan */
+        rgba(255, 255, 255, 0.7) /* putih semi transparan */
+      );
       z-index: -1;
     }
 
     .hero-content {
       position: relative;
       text-align: center;
-      color: white;
       padding: 0 20px;
     }
 
-    .hero-content h1 {
-      font-size: 3rem;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .hero-content p {
-      font-size: 1.3rem;
-      margin-bottom: 20px;
-    }
-
-    /* Social icons */
-    .social-icons {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-    }
-
-    .social-icons a {
-      display: inline-block;
-      width: 40px;
-      height: 40px;
-      background: white;
-      color: black;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      transition: 0.3s;
-    }
-
-    .social-icons a:hover {
-      background: #ff69b4;
-      color: white;
-    }
-
-    /* About Section (Mobile First) */
+    /* About Section */
     .about {
       min-height: 100vh;
       display: flex;
-      flex-direction: column; /* default mobile: atas bawah */
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 60px 20px;
+      padding: 80px 20px;
       gap: 20px;
-      background: #222;
+      background: #e6f6ff; /* biru muda lebih soft */
       text-align: center;
     }
 
@@ -183,19 +166,21 @@
     .about-text h2 {
       font-size: 2rem;
       margin-bottom: 15px;
-      color: #ff69b4;
+      color: #004080;
+      font-weight: 500;
     }
 
     .about-text p {
       font-size: 1.1rem;
       line-height: 1.6;
       margin-bottom: 15px;
+      color: #333;
     }
 
     /* Mode PC / Desktop */
     @media (min-width: 768px) {
       .about {
-        flex-direction: row; /* samping-samping */
+        flex-direction: row;
         text-align: left;
         gap: 40px;
       }
@@ -217,17 +202,14 @@
       }
     }
 
-    /* Responsif tambahan hero */
-    @media (max-width: 480px) {
-      .hero-content h1 {
-        font-size: 2rem;
-      }
-      .hero-content p {
-        font-size: 1rem;
+    /* Hero responsive fix untuk HP */
+    @media (max-width: 768px) {
+      .hero {
+        height: 50vh; /* jadi banner landscape, tidak full */
       }
     }
-
   </style>
+
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const hamburger = document.querySelector(".hamburger");
@@ -238,21 +220,20 @@
       });
     });
   </script>
-  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
   <!-- Navbar -->
   <header>
-    <div class="logo">Arariel.ID</div>
+    <div class="logo">Trishaland</div>
     <nav>
       <ul>
         <li><a href="#">HOME</a></li>
-        <li><a href="#">ABOUT ARALIE</a></li>
+        <li><a href="#">ABOUT TRISHA</a></li>
         <li><a href="#">SHOW</a></li>
         <li><a href="#">HISTORY</a></li>
         <li><a href="#">TESTIMONI</a></li>
-        <li><a href="#">CONTACT ARARIEL</a></li>
+        <li><a href="#">CONTACT</a></li>
       </ul>
     </nav>
     <div class="hamburger">
@@ -268,29 +249,19 @@
       <source src="trishahero.mp4" type="video/mp4">
       Browser kamu tidak mendukung video background.
     </video>
-
     <div class="hero-content">
-      <p>Welcome to</p>
-      <h1>Aralie & Arariel</h1>
-      <div class="social-icons">
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-tiktok"></i></a>
-        <a href="#"><i class="fas fa-link"></i></a>
-        <a href="#"><i class="fas fa-shopping-cart"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
-      </div>
+      <!-- bisa tambahin text/judul di sini -->
     </div>
   </section>
 
   <!-- About -->
   <section class="about">
-    <img src="https://picsum.photos/400/400" alt="Aralie">
+    <img src="https://picsum.photos/400/400" alt="Trisha">
     <div class="about-text">
-      <h2>Tentang Aralie</h2>
-      <p>Aralie adalah sosok penuh inspirasi dengan kisah perjalanan yang unik dan memikat hati banyak orang. 
+      <h2>Tentang Trisha</h2>
+      <p>Trisha adalah sosok penuh inspirasi dengan kisah perjalanan yang unik dan memikat hati banyak orang. 
       Ia hadir dengan semangat dan visi besar untuk berbagi cerita serta karya yang menginspirasi.</p>
-      <p>Melalui Arariel, ia menghubungkan banyak orang dengan karya seni, pertunjukan, dan pengalaman yang membawa kesan mendalam.</p>
+      <p>Melalui Trishaland, ia menghubungkan banyak orang dengan karya seni, pertunjukan, dan pengalaman yang membawa kesan mendalam.</p>
     </div>
   </section>
 
