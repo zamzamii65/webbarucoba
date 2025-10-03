@@ -148,6 +148,7 @@
       position: relative;
       text-align: center;
       padding: 0 20px;
+      color: white;
     }
 
     .hero-gradient {
@@ -158,7 +159,7 @@
       z-index: 1;
     }
 
-    /* ABOUT BARU (FULL REPLACE) */
+    /* ABOUT */
     .about-new {
       width: 100%;
       padding: 100px 20px;
@@ -178,6 +179,7 @@
     .about-left-new {
       flex: 1;
       min-width: 300px;
+      text-align: center;
     }
 
     .opening-text {
@@ -230,6 +232,14 @@
       gap: 10px;
       font-size: 1rem;
       color: white;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .biodata-item.active {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .btn-about {
@@ -273,17 +283,22 @@
         margin-top: -80px;
       }
     }
-  </style>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const hamburger = document.querySelector(".hamburger");
-      const navMenu = document.querySelector("nav ul");
-      hamburger.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
-      });
-    });
-  </script>
+    /* ANIMASI */
+    .reveal, .reveal-left, .reveal-right {
+      opacity: 0;
+      transition: all 0.8s ease;
+    }
+
+    .reveal { transform: translateY(40px); }
+    .reveal-left { transform: translateX(-40px); }
+    .reveal-right { transform: translateX(40px); }
+
+    .reveal.active, .reveal-left.active, .reveal-right.active {
+      opacity: 1;
+      transform: translate(0,0);
+    }
+  </style>
 </head>
 <body>
 
@@ -296,9 +311,11 @@
     <nav>
       <ul>
         <li><a href="#">HOME</a></li>
-        <li><a href="#">ABOUT TRISHA</a></li>
-        <li><a href="#">SCHEDULE</a></li>
-        <li><a href="#">CORNER</a></li>
+        <li><a href="#about">ABOUT TRISHA</a></li>
+        <li><a href="#">SHOW</a></li>
+        <li><a href="#">HISTORY</a></li>
+        <li><a href="#">TESTIMONI</a></li>
+        <li><a href="#">CONTACT</a></li>
       </ul>
     </nav>
     <div class="hamburger">
@@ -314,28 +331,24 @@
       <source src="trishahero.mp4" type="video/mp4">
       Browser kamu tidak mendukung video background.
     </video>
-    <div class="hero-content"></div>
+    <div class="hero-content">
+      <h1 class="reveal">Selamat Datang di TrishaLand</h1>
+    </div>
   </section>
 
   <div class="hero-gradient"></div>
 
-  <!-- ABOUT BARU -->
-  <section class="about-new">
+  <!-- ABOUT -->
+  <section class="about-new" id="about">
     <div class="about-container">
       <div class="about-left-new">
-        <p class="opening-text">
-          Jalan-jalan ke kota mamasa<br>
-          Selamat datang di Fansite Trisha
-        </p>
-        <img src="trisha1.jpg" alt="Trisha" class="about-photo">
+        <p class="opening-text reveal">Jalan-jalan ke kota mamasa<br>Selamat datang di Fansite Trisha</p>
+        <img src="trisha1.jpg" alt="Trisha" class="about-photo reveal-left">
       </div>
 
       <div class="about-right-new">
-        <h2 class="about-name">Jazzlyn Trisha</h2>
-        <p class="about-quote">
-          “Pelukis yang hadir di mimpi-mimpimu indahmu,<br>
-          one two trishaaa...”
-        </p>
+        <h2 class="about-name reveal-right">Jazzlyn Trisha</h2>
+        <p class="about-quote reveal">“Pelukis yang hadir di mimpi-mimpimu indahmu,<br>one two trishaaa...”</p>
 
         <div class="biodata-card">
           <div class="biodata-item"><span>📅</span> 16 Februari 2011</div>
@@ -346,10 +359,54 @@
           <div class="biodata-item"><span>🎨</span> Melukis</div>
         </div>
 
-        <a href="#" class="btn-about">Selengkapnya</a>
+        <a href="#" class="btn-about reveal">Selengkapnya</a>
       </div>
     </div>
   </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Hamburger
+      const hamburger = document.querySelector(".hamburger");
+      const navMenu = document.querySelector("nav ul");
+      hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+      });
+
+      // Animasi umum looping
+      const reveals = document.querySelectorAll(".reveal, .reveal-left, .reveal-right");
+      const observer1 = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          } else {
+            entry.target.classList.remove("active");
+          }
+        });
+      }, { threshold: 0.2 });
+      reveals.forEach(r => observer1.observe(r));
+
+      // Animasi biodata looping
+      const biodataItems = document.querySelectorAll(".biodata-item");
+      const observer2 = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            biodataItems.forEach((item, index) => {
+              setTimeout(() => {
+                item.classList.add("active");
+              }, index * 100);
+            });
+          } else {
+            biodataItems.forEach(item => item.classList.remove("active"));
+          }
+        });
+      }, { threshold: 0.2 });
+
+      if (biodataItems.length > 0) {
+        observer2.observe(biodataItems[0].parentElement);
+      }
+    });
+  </script>
 
 </body>
 </html>
