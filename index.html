@@ -130,7 +130,7 @@
       z-index: -2;
     }
 
-    /* Overlay gradasi biru tua → putih */
+    /* Overlay gradasi atas (biru tua → putih) */
     .hero::after {
       content: "";
       position: absolute;
@@ -141,7 +141,7 @@
       background: linear-gradient(
         to bottom,
         rgba(0, 64, 128, 0.5),   /* biru tua transparan */
-        rgba(255, 255, 255, 0.7) /* putih semi transparan */
+        rgba(255, 255, 255, 0.6) /* putih semi transparan */
       );
       z-index: -1;
     }
@@ -150,6 +150,15 @@
       position: relative;
       text-align: center;
       padding: 0 20px;
+    }
+
+    /* Gradasi transisi hero → about */
+    .hero-gradient {
+      position: relative;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, #e6f6ff);
+      margin-top: -120px; /* biar nempel tanpa gap */
+      z-index: 1;
     }
 
     /* About Section */
@@ -219,6 +228,10 @@
       .hero {
         height: 50vh; /* jadi banner landscape, tidak full */
       }
+      .hero-gradient {
+        height: 80px;
+        margin-top: -80px;
+      }
     }
   </style>
 
@@ -268,6 +281,9 @@
       <!-- bisa tambahin text/judul di sini -->
     </div>
   </section>
+
+  <!-- Gradasi transisi -->
+  <div class="hero-gradient"></div>
 
   <!-- About -->
   <section class="about">
